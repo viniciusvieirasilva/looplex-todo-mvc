@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`can create a ToDoList, add and remove items 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "id": "item-1",
+      "isCompleted": false,
+      "title": "item 1",
+    },
+    Object {
+      "id": "item-3",
+      "isCompleted": false,
+      "title": "item 3",
+    },
+  ],
+}
+`;
+
+exports[`can create a ToDoList, add and remove items 2`] = `
+Array [
+  Object {
+    "op": "remove",
+    "path": "/items/1",
+  },
+  Object {
+    "op": "add",
+    "path": "/items/1",
+    "value": Object {
+      "id": "item-3",
+      "isCompleted": false,
+      "title": "item 3",
+    },
+  },
+]
+`;
