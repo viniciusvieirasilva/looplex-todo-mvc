@@ -13,7 +13,10 @@ export const ToDoListItem = types
   })
   .actions(self => ({
     changeTitle (newTitle) {
-      if (newTitle != '') {
+      if (
+        newTitle != '' &&
+        !getParent(self, 2).items.some(item => item.title === newTitle)
+      ) {
         self.title = newTitle
       }
     },
@@ -42,7 +45,7 @@ export const ToDoList = types
   })
   .actions(self => ({
     add (title) {
-      if (title != '') {
+      if (title != '' && !self.items.some(item => item.title === title)) {
         self.items.push({
           id: encodeURIComponent(title.toLowerCase().replace(/\s+/gim, '-')),
           title: title,
@@ -55,6 +58,7 @@ export const ToDoList = types
       destroy(item)
     },
     undoRemove () {
+      console.log(JSON.stringify(self.prevItems))
       if (self.prevItems.length) {
         self.items = getSnapshot(self.prevItems)
         self.prevItems = []
@@ -72,10 +76,12 @@ export const ToDoList = types
       }
     },
     removeCompleted () {
+      self.prevItems = getSnapshot(self.items)
+      console.log(JSON.stringify(self.prevItems))
       if (self.items.some(item => item.isCompleted)) {
         self.items.forEach(item => {
           if (item.isCompleted) {
-            item.removeItem()
+            destroy(item)
           }
         })
       }

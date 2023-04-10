@@ -10,14 +10,16 @@ import { observer } from 'mobx-react'
 const { Text } = Typography
 
 const ToDoListItemView = observer(
-  ({ item, openNotification, closeNotification, deleteConfirm }) => {
+  ({ item, openNotification, closeNotification, deleteConfirm, onUndo }) => {
     function handleRemoveClick (e) {
       closeNotification()
       deleteConfirm(() => {
         e.preventDefault()
         item.removeItem()
-        openNotification()
-      })
+        openNotification(() => {
+          onUndo()
+        })
+      }, 'Deseja remover este item?')
     }
 
     return (

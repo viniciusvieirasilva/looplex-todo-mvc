@@ -39,14 +39,14 @@ const ToDoListView = observer(({ toDoList }) => {
     api.destroy(key)
   }
 
-  const openNotification = () => {
+  const openNotification = onUndo => {
     const key = 'updatable'
     const btn = (
       <>
         <Button
           type='primary'
           onClick={() => {
-            toDoList.undoRemove()
+            onUndo()
             closeNotification(key)
           }}
           danger
@@ -67,11 +67,11 @@ const ToDoListView = observer(({ toDoList }) => {
 
   const [modal, contextHolderModal] = Modal.useModal()
 
-  const deleteConfirm = onConfirm => {
+  const deleteConfirm = (onConfirm, content) => {
     modal.confirm({
       title: 'Excluir',
       icon: <ExclamationCircleOutlined />,
-      content: 'Deseja remover este item?',
+      content: content,
       okText: 'Excluir',
       cancelText: 'Cancelar',
       onOk: onConfirm
@@ -133,7 +133,14 @@ const ToDoListView = observer(({ toDoList }) => {
               <Button
                 className='footerButton'
                 danger
-                onClick={toDoList.removeCompleted}
+                onClick={() => {
+                  deleteConfirm(() => {
+                    toDoList.removeCompleted()
+                    openNotification(() => {
+                      toDoList.undoRemove()
+                    })
+                  }, 'Deseja remover os items completados?')
+                }}
               >
                 Apagar concluídos
               </Button>
@@ -152,6 +159,7 @@ const ToDoListView = observer(({ toDoList }) => {
             openNotification={openNotification}
             closeNotification={closeNotification}
             deleteConfirm={deleteConfirm}
+            onUndo={() => toDoList.undoRemove()}
           />
         )}
       />
