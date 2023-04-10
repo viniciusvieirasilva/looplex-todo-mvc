@@ -1,4 +1,4 @@
-import { Image, Layout, Card, Typography } from 'antd'
+import { Image, Layout, Card, Typography, Row, Col } from 'antd'
 const { Header, Content } = Layout
 import { ToDoList } from '@/models/ToDoList'
 import ToDoListView from '@/components/ToDoListView'
@@ -39,7 +39,11 @@ export default function Home () {
       </Header>
       <Content className='content'>
         <Card bordered={false} className='card'>
-          <ToDoListView toDoList={toDoList} />
+          <Row justify='center'>
+            <Col lg={16}>
+              <ToDoListView toDoList={toDoList} />
+            </Col>
+          </Row>
         </Card>
       </Content>
     </Layout>

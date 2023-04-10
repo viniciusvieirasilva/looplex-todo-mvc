@@ -9,52 +9,58 @@ import { observer } from 'mobx-react'
 
 const { Text } = Typography
 
-const ToDoListItemView = observer(({ item }) => {
-  function handleRemoveClick (e) {
-    e.preventDefault()
-    item.removeItem()
-  }
+const ToDoListItemView = observer(
+  ({ item, openNotification, closeNotification, deleteConfirm }) => {
+    function handleRemoveClick (e) {
+      closeNotification()
+      deleteConfirm(() => {
+        e.preventDefault()
+        item.removeItem()
+        openNotification()
+      })
+    }
 
-  return (
-    <>
-      {item.isCompleted ? (
-        <List.Item className='listItem'>
-          <Button
-            type='primary'
-            shape='circle'
-            onClick={item.toggleIsCompleted}
-            icon={<CheckCircleTwoTone style={{ fontSize: '22px' }} />}
-          ></Button>
-          <Text ellipsis='true' className='listItemText' delete disabled>
-            {item.title}
-          </Text>
-          <Button onClick={handleRemoveClick} danger>
-            <DeleteFilled style={{ fontSize: '18px' }} />
-          </Button>
-        </List.Item>
-      ) : (
-        <List.Item className='listItem'>
-          <Button
-            shape='circle'
-            onClick={item.toggleIsCompleted}
-            icon={<CheckCircleOutlined style={{ fontSize: '22px' }} />}
-          ></Button>
-          <Text
-            style={{ width: '100%', overflow: 'hidden' }}
-            ellipsis={{ tooltip: 'I am ellipsis now!' }}
-            className='listItemText'
-            value={item.title}
-            editable={{ onChange: item.changeTitle, triggerType: 'text' }}
-          >
-            {item.title}
-          </Text>
-          <Button onClick={handleRemoveClick} danger>
-            <DeleteFilled style={{ fontSize: '18px' }} />
-          </Button>
-        </List.Item>
-      )}
-    </>
-  )
-})
+    return (
+      <>
+        {item.isCompleted ? (
+          <List.Item className='listItem'>
+            <Button
+              type='primary'
+              shape='circle'
+              onClick={item.toggleIsCompleted}
+              icon={<CheckCircleTwoTone style={{ fontSize: '22px' }} />}
+            ></Button>
+            <Text ellipsis='true' className='listItemText' delete disabled>
+              {item.title}
+            </Text>
+            <Button onClick={handleRemoveClick} danger>
+              <DeleteFilled style={{ fontSize: '18px' }} />
+            </Button>
+          </List.Item>
+        ) : (
+          <List.Item className='listItem'>
+            <Button
+              shape='circle'
+              onClick={item.toggleIsCompleted}
+              icon={<CheckCircleOutlined style={{ fontSize: '22px' }} />}
+            ></Button>
+            <Text
+              style={{ width: '100%', overflow: 'hidden' }}
+              ellipsis={{ tooltip: 'I am ellipsis now!' }}
+              className='listItemText'
+              value={item.title}
+              editable={{ onChange: item.changeTitle, triggerType: 'text' }}
+            >
+              {item.title}
+            </Text>
+            <Button onClick={handleRemoveClick} danger>
+              <DeleteFilled style={{ fontSize: '18px' }} />
+            </Button>
+          </List.Item>
+        )}
+      </>
+    )
+  }
+)
 
 export default ToDoListItemView

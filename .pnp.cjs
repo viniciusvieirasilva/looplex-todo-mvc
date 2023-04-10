@@ -29,6 +29,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@ant-design/icons", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:5.0.1"],\
+            ["@dnd-kit/core", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:6.0.8"],\
+            ["@dnd-kit/sortable", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:7.0.2"],\
+            ["@dnd-kit/utilities", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:3.2.1"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:14.0.0"],\
             ["antd", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:5.3.3"],\
@@ -3323,6 +3326,109 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@ctrl-tinycolor-npm-3.6.0-fc89a669c3-4d1e481b4d.zip/node_modules/@ctrl/tinycolor/",\
           "packageDependencies": [\
             ["@ctrl/tinycolor", "npm:3.6.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@dnd-kit/accessibility", [\
+        ["npm:3.0.1", {\
+          "packageLocation": "./.yarn/cache/@dnd-kit-accessibility-npm-3.0.1-78bf91a820-0afc2c0fce.zip/node_modules/@dnd-kit/accessibility/",\
+          "packageDependencies": [\
+            ["@dnd-kit/accessibility", "npm:3.0.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:b40500f6936989bf8813f29b37978aa12c40cfd007eb4bffea7fd1af00e06cb7f2a2857e573fbe9b09dd7475b4e77af051fae2d75df1036b323a7b90c3a979f9#npm:3.0.1", {\
+          "packageLocation": "./.yarn/__virtual__/@dnd-kit-accessibility-virtual-cee306c96d/0/cache/@dnd-kit-accessibility-npm-3.0.1-78bf91a820-0afc2c0fce.zip/node_modules/@dnd-kit/accessibility/",\
+          "packageDependencies": [\
+            ["@dnd-kit/accessibility", "virtual:b40500f6936989bf8813f29b37978aa12c40cfd007eb4bffea7fd1af00e06cb7f2a2857e573fbe9b09dd7475b4e77af051fae2d75df1036b323a7b90c3a979f9#npm:3.0.1"],\
+            ["@types/react", null],\
+            ["react", "npm:18.2.0"],\
+            ["tslib", "npm:2.5.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@dnd-kit/core", [\
+        ["npm:6.0.8", {\
+          "packageLocation": "./.yarn/cache/@dnd-kit-core-npm-6.0.8-66053fe203-abe48ff739.zip/node_modules/@dnd-kit/core/",\
+          "packageDependencies": [\
+            ["@dnd-kit/core", "npm:6.0.8"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:6.0.8", {\
+          "packageLocation": "./.yarn/__virtual__/@dnd-kit-core-virtual-b40500f693/0/cache/@dnd-kit-core-npm-6.0.8-66053fe203-abe48ff739.zip/node_modules/@dnd-kit/core/",\
+          "packageDependencies": [\
+            ["@dnd-kit/core", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:6.0.8"],\
+            ["@dnd-kit/accessibility", "virtual:b40500f6936989bf8813f29b37978aa12c40cfd007eb4bffea7fd1af00e06cb7f2a2857e573fbe9b09dd7475b4e77af051fae2d75df1036b323a7b90c3a979f9#npm:3.0.1"],\
+            ["@dnd-kit/utilities", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:3.2.1"],\
+            ["@types/react", null],\
+            ["@types/react-dom", null],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:18.2.0"],\
+            ["tslib", "npm:2.5.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@dnd-kit/sortable", [\
+        ["npm:7.0.2", {\
+          "packageLocation": "./.yarn/cache/@dnd-kit-sortable-npm-7.0.2-8871eace61-4ce705aceb.zip/node_modules/@dnd-kit/sortable/",\
+          "packageDependencies": [\
+            ["@dnd-kit/sortable", "npm:7.0.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:7.0.2", {\
+          "packageLocation": "./.yarn/__virtual__/@dnd-kit-sortable-virtual-141ba2aacc/0/cache/@dnd-kit-sortable-npm-7.0.2-8871eace61-4ce705aceb.zip/node_modules/@dnd-kit/sortable/",\
+          "packageDependencies": [\
+            ["@dnd-kit/sortable", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:7.0.2"],\
+            ["@dnd-kit/core", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:6.0.8"],\
+            ["@dnd-kit/utilities", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:3.2.1"],\
+            ["@types/dnd-kit__core", null],\
+            ["@types/react", null],\
+            ["react", "npm:18.2.0"],\
+            ["tslib", "npm:2.5.0"]\
+          ],\
+          "packagePeers": [\
+            "@dnd-kit/core",\
+            "@types/dnd-kit__core",\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@dnd-kit/utilities", [\
+        ["npm:3.2.1", {\
+          "packageLocation": "./.yarn/cache/@dnd-kit-utilities-npm-3.2.1-e4b7ea044f-038fd5cc13.zip/node_modules/@dnd-kit/utilities/",\
+          "packageDependencies": [\
+            ["@dnd-kit/utilities", "npm:3.2.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:3.2.1", {\
+          "packageLocation": "./.yarn/__virtual__/@dnd-kit-utilities-virtual-b33142b627/0/cache/@dnd-kit-utilities-npm-3.2.1-e4b7ea044f-038fd5cc13.zip/node_modules/@dnd-kit/utilities/",\
+          "packageDependencies": [\
+            ["@dnd-kit/utilities", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:3.2.1"],\
+            ["@types/react", null],\
+            ["react", "npm:18.2.0"],\
+            ["tslib", "npm:2.5.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12042,6 +12148,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["looplex-todo-mvc", "workspace:."],\
             ["@ant-design/icons", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:5.0.1"],\
+            ["@dnd-kit/core", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:6.0.8"],\
+            ["@dnd-kit/sortable", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:7.0.2"],\
+            ["@dnd-kit/utilities", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:3.2.1"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:14.0.0"],\
             ["antd", "virtual:6c17fbeb37ad1660152faceab84182f6f17a6e6b1d0b279c6812c2533d0c014af255e31ddc272e46af72969f909248009e5a804df29f42e69b06098f5450eef7#npm:5.3.3"],\

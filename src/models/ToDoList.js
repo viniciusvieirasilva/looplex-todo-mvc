@@ -1,4 +1,4 @@
-import { types, getParent, destroy } from 'mobx-state-tree'
+import { types, getParent, destroy, getSnapshot } from 'mobx-state-tree'
 import { Howl } from 'howler'
 
 const sound = new Howl({
@@ -7,7 +7,7 @@ const sound = new Howl({
 
 export const ToDoListItem = types
   .model({
-    id: types.string,
+    id: types.identifier,
     title: types.string,
     isCompleted: false
   })
@@ -37,7 +37,8 @@ export const ToDoListItem = types
 
 export const ToDoList = types
   .model({
-    items: types.optional(types.array(ToDoListItem), [])
+    items: types.optional(types.array(ToDoListItem), []),
+    prevItems: types.optional(types.array(ToDoListItem), [])
   })
   .actions(self => ({
     add (title) {
@@ -50,7 +51,14 @@ export const ToDoList = types
       }
     },
     remove (item) {
+      self.prevItems = getSnapshot(self.items)
       destroy(item)
+    },
+    undoRemove () {
+      if (self.prevItems.length) {
+        self.items = getSnapshot(self.prevItems)
+        self.prevItems = []
+      }
     },
     toggleListIsCompleted () {
       if (self.items.some(item => !item.isCompleted)) {

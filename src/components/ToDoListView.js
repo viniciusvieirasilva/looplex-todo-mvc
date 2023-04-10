@@ -1,7 +1,20 @@
 import React, { useState } from 'react'
 import ToDoListItemView from './ToDoListItemView'
-import { List, Input, Button, Tooltip, Divider, Radio, Typography } from 'antd'
-import { CheckCircleTwoTone } from '@ant-design/icons'
+import {
+  List,
+  Input,
+  Button,
+  Tooltip,
+  Divider,
+  Radio,
+  Typography,
+  notification,
+  Modal
+} from 'antd'
+import {
+  CheckCircleTwoTone,
+  ExclamationCircleOutlined
+} from '@ant-design/icons'
 import { observer } from 'mobx-react'
 
 const { Text } = Typography
@@ -20,10 +33,56 @@ const ToDoListView = observer(({ toDoList }) => {
     setFilter(e.target.value)
   }
 
+  const [api, contextHolder] = notification.useNotification()
+
+  const closeNotification = key => {
+    api.destroy(key)
+  }
+
+  const openNotification = () => {
+    const key = 'updatable'
+    const btn = (
+      <>
+        <Button
+          type='primary'
+          onClick={() => {
+            toDoList.undoRemove()
+            closeNotification(key)
+          }}
+          danger
+        >
+          Desfazer
+        </Button>
+      </>
+    )
+    api.open({
+      message: 'Item excluído com sucesso',
+      description: '',
+      duration: 3,
+      btn,
+      key,
+      onClose: closeNotification(key)
+    })
+  }
+
+  const [modal, contextHolderModal] = Modal.useModal()
+
+  const deleteConfirm = onConfirm => {
+    modal.confirm({
+      title: 'Excluir',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Deseja remover este item?',
+      okText: 'Excluir',
+      cancelText: 'Cancelar',
+      onOk: onConfirm
+    })
+  }
+
   return (
-    <div className='list'>
+    <div>
+      {contextHolder}
+      {contextHolderModal}
       <List
-        style={{ margin: '0px 400px' }}
         header={
           <Input
             placeholder='Novo item'
@@ -87,7 +146,14 @@ const ToDoListView = observer(({ toDoList }) => {
         }
         bordered
         dataSource={toDoList.getfilteredItems(filter)}
-        renderItem={item => <ToDoListItemView item={item} />}
+        renderItem={item => (
+          <ToDoListItemView
+            item={item}
+            openNotification={openNotification}
+            closeNotification={closeNotification}
+            deleteConfirm={deleteConfirm}
+          />
+        )}
       />
     </div>
   )
