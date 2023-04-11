@@ -16,9 +16,13 @@
 }
 
 .main {
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   min-height: 100vh;
+}
+
+.ant-card {
+  height: 100%;
 }
 
 .listFooter {
@@ -38,7 +42,24 @@
   width: 100%;
 }
 
-.card {
-  height: 100%;
+.content {
   min-width: 650px;
+}
+
+.card {
+  height: calc(100vh - 200px);
+  min-width: 650px;
+  box-shadow: none;
+}
+
+.ant-card-body {
+  height: 100%;
+}
+
+.droppable-container {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding-inline: 24px;
+  padding-block: 12px
 }

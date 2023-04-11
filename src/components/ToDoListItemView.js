@@ -25,7 +25,7 @@ const ToDoListItemView = observer(
     return (
       <>
         {item.isCompleted ? (
-          <List.Item className='listItem'>
+          <List.Item className='listItem' style={{ padding: '10px' }}>
             <Button
               type='primary'
               shape='circle'
@@ -40,7 +40,7 @@ const ToDoListItemView = observer(
             </Button>
           </List.Item>
         ) : (
-          <List.Item className='listItem'>
+          <List.Item className='listItem' style={{ padding: '10px' }}>
             <Button
               shape='circle'
               onClick={item.toggleIsCompleted}
@@ -48,7 +48,7 @@ const ToDoListItemView = observer(
             ></Button>
             <Text
               style={{ width: '100%', overflow: 'hidden' }}
-              ellipsis={{ tooltip: 'I am ellipsis now!' }}
+              ellipsis='true'
               className='listItemText'
               value={item.title}
               editable={{ onChange: item.changeTitle, triggerType: 'text' }}

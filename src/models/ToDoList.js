@@ -1,4 +1,4 @@
-import { types, getParent, destroy, getSnapshot } from 'mobx-state-tree'
+import { types, getParent, destroy, getSnapshot, detach } from 'mobx-state-tree'
 import { Howl } from 'howler'
 
 const sound = new Howl({
@@ -22,7 +22,6 @@ export const ToDoListItem = types
     },
     toggleIsCompleted () {
       self.isCompleted = !self.isCompleted
-      //   if (self.isCompleted && !sound.playing()) {
       if (self.isCompleted) {
         if (sound.playing()) {
           sound.stop()
@@ -31,7 +30,6 @@ export const ToDoListItem = types
           sound.play()
         }
       }
-      //   }
     },
     removeItem () {
       getParent(self, 2).remove(self)
@@ -58,7 +56,6 @@ export const ToDoList = types
       destroy(item)
     },
     undoRemove () {
-      console.log(JSON.stringify(self.prevItems))
       if (self.prevItems.length) {
         self.items = getSnapshot(self.prevItems)
         self.prevItems = []
@@ -77,7 +74,6 @@ export const ToDoList = types
     },
     removeCompleted () {
       self.prevItems = getSnapshot(self.items)
-      console.log(JSON.stringify(self.prevItems))
       if (self.items.some(item => item.isCompleted)) {
         self.items.forEach(item => {
           if (item.isCompleted) {
@@ -85,6 +81,13 @@ export const ToDoList = types
           }
         })
       }
+    },
+    setItems (newItems) {
+      self.items = newItems
+    },
+    reorder (from, to) {
+      const item = detach(self.items[from])
+      self.items.splice(to, 0, item)
     }
   }))
   .views(self => ({
