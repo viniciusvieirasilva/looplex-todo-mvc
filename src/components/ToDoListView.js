@@ -81,6 +81,24 @@ const ToDoListView = observer(({ toDoList }) => {
     toDoList.setItems(updatedItems)
   }
 
+  const getItemStyle = (isDragging, draggableStyle) => ({
+    // some basic styles to make the items look a bit nicer
+    userSelect: 'none',
+    padding: items.length * 2,
+    margin: `0 0 ${items.length}px 0`,
+    borderRadius: '8px',
+
+    // change background colour if dragging
+    background: isDragging ? 'lightgreen' : 'inherit',
+
+    // styles we need to apply on draggables
+    ...draggableStyle
+  })
+
+  const getListStyle = isDraggingOver => ({
+    background: isDraggingOver ? 'lightcyan' : 'inherit'
+  })
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId='droppable'>
@@ -89,13 +107,7 @@ const ToDoListView = observer(({ toDoList }) => {
             className='droppable-container'
             {...provided.droppableProps}
             ref={provided.innerRef}
-            style={{
-              transition: 'background-color 0.2s ease',
-              backgroundColor: snapshot.isDraggingOver
-                ? 'lightCyan'
-                : 'inherit',
-              padding: '16px'
-            }}
+            style={getListStyle(snapshot.isDraggingOver)}
           >
             {contextHolder}
             {contextHolderModal}
@@ -110,6 +122,10 @@ const ToDoListView = observer(({ toDoList }) => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
+                        style={getItemStyle(
+                          snapshot.isDragging,
+                          provided.draggableProps.style
+                        )}
                       >
                         <ToDoListItemView
                           item={item}
