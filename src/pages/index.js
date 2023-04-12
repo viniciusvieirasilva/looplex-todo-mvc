@@ -38,7 +38,11 @@ export default function Home () {
         <Title style={{ color: 'white' }}>Looplex ToDo MVC</Title>
       </Header>
       <Content className='content'>
-        <Card bordered={false} className='card'>
+        <Card
+          bordered={false}
+          className='card'
+          style={{ boxShadow: 'none', height: 'calc(100vh - 200px)' }}
+        >
           <Row justify='center'>
             <Col lg={16}>
               <ToDoListView toDoList={toDoList} />

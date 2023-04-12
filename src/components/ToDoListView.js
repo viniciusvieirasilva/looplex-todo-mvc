@@ -84,8 +84,8 @@ const ToDoListView = observer(({ toDoList }) => {
   const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
     userSelect: 'none',
-    padding: items.length * 2,
-    margin: `0 0 ${items.length}px 0`,
+    padding: '15px 0',
+    // margin: `0 0 ${items.length}px 0`,
     borderRadius: '8px',
 
     // change background colour if dragging
