@@ -1,5 +1,5 @@
 import { Button, Divider, Radio, Typography } from 'antd'
-import { Observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 
 const ListFooter = ({ toDoList, deleteConfirm, openNotification }) => {
   function handleChangeFilter (e) {
@@ -10,9 +10,7 @@ const ListFooter = ({ toDoList, deleteConfirm, openNotification }) => {
 
   return (
     <div className='listFooter'>
-      <Observer>
-        {() => <Text>{toDoList.totalLeftCount} itens restantes</Text>}
-      </Observer>
+      <Text>{toDoList.totalLeftCount} itens restantes</Text>
       <Divider type='vertical' />
       <Radio.Group
         buttonStyle='solid'
@@ -25,29 +23,28 @@ const ListFooter = ({ toDoList, deleteConfirm, openNotification }) => {
         <Radio.Button value='naoConcluidos'>Não Concluídos</Radio.Button>
       </Radio.Group>
       <Divider type='vertical' />
-      {toDoList.totalCompletedCount &&
-      (toDoList.filter == 'todos' || toDoList.filter == 'concluidos') > 0 ? (
-        <Button
-          className='footerButton'
-          danger
-          onClick={() => {
-            deleteConfirm(() => {
-              toDoList.removeCompleted()
-              openNotification(() => {
-                toDoList.undoRemove()
-              })
-            }, 'Deseja remover os items completados?')
-          }}
-        >
-          Apagar concluídos
-        </Button>
-      ) : (
-        <Button className='footerButton' danger disabled>
-          Apagar concluídos
-        </Button>
-      )}
+      <Button
+        className='footerButton'
+        danger
+        onClick={() => {
+          deleteConfirm(() => {
+            toDoList.removeCompleted()
+            openNotification(() => {
+              toDoList.undoRemove()
+            })
+          }, 'Deseja remover os items completados?')
+        }}
+        disabled={
+          !(
+            (toDoList.totalCompletedCount && toDoList.filter === 'todos') ||
+            toDoList.filter === 'concluidos'
+          )
+        }
+      >
+        Apagar concluídos
+      </Button>
     </div>
   )
 }
 
-export default ListFooter
+export default observer(ListFooter)

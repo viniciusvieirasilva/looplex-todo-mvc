@@ -24,42 +24,31 @@ const ToDoListItemView = observer(
 
     return (
       <>
-        {item.isCompleted ? (
-          <List.Item className='listItem' style={{ padding: '10px' }}>
-            <Button
-              type='primary'
-              shape='circle'
-              onClick={item.toggleIsCompleted}
-              icon={<CheckCircleTwoTone style={{ fontSize: '22px' }} />}
-            ></Button>
-            <Text ellipsis='true' className='listItemText' delete disabled>
-              {item.title}
-            </Text>
-            <Button onClick={handleRemoveClick} danger>
-              <DeleteFilled style={{ fontSize: '18px' }} />
-            </Button>
-          </List.Item>
-        ) : (
-          <List.Item className='listItem' style={{ padding: '10px' }}>
-            <Button
-              shape='circle'
-              onClick={item.toggleIsCompleted}
-              icon={<CheckCircleOutlined style={{ fontSize: '22px' }} />}
-            ></Button>
-            <Text
-              style={{ width: '100%', overflow: 'hidden' }}
-              ellipsis='true'
-              className='listItemText'
-              value={item.title}
-              editable={{ onChange: item.changeTitle, triggerType: 'text' }}
-            >
-              {item.title}
-            </Text>
-            <Button onClick={handleRemoveClick} danger>
-              <DeleteFilled style={{ fontSize: '18px' }} />
-            </Button>
-          </List.Item>
-        )}
+        <List.Item className='listItem' style={{ padding: '10px' }}>
+          <Button
+            type={item.isCompleted ? 'primary' : 'default'}
+            shape='circle'
+            onClick={item.toggleIsCompleted}
+            icon={<CheckCircleTwoTone style={{ fontSize: '22px' }} />}
+          ></Button>
+          <Text
+            style={{ width: '100%', overflow: 'hidden' }}
+            ellipsis='true'
+            className='listItemText'
+            delete={item.isCompleted}
+            disabled={item.isCompleted}
+            editable={
+              item.isCompleted
+                ? false
+                : { onChange: item.changeTitle, triggerType: 'text' }
+            }
+          >
+            {item.title}
+          </Text>
+          <Button onClick={handleRemoveClick} danger>
+            <DeleteFilled style={{ fontSize: '18px' }} />
+          </Button>
+        </List.Item>
       </>
     )
   }

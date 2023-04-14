@@ -66,11 +66,12 @@ export const ToDoList = types
       if (self.items.some(item => !item.isCompleted)) {
         self.items.forEach(item => {
           if (!item.isCompleted) {
-            item.toggleIsCompleted()
+            item.isCompleted = !item.isCompleted
           }
         })
+        sound.play()
       } else {
-        self.items.forEach(item => item.toggleIsCompleted())
+        self.items.forEach(item => (item.isCompleted = !item.isCompleted))
       }
     },
     removeCompleted () {
