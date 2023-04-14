@@ -3,19 +3,19 @@ const { Header, Content } = Layout
 import { ToDoList } from '@/models/ToDoList'
 import ToDoListView from '@/components/ToDoListView'
 import { onSnapshot } from 'mobx-state-tree'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const { Title } = Typography
 
-export default function Home () {
-  const [toDoList, setToDoList] = useState(ToDoList.create({ items: [] }))
+const toDoList = ToDoList.create({ items: [] })
 
+export default function Home () {
   useEffect(() => {
     const localStorageData = localStorage.getItem('toDoListApp')
     if (localStorageData) {
       const json = JSON.parse(localStorageData)
       if (ToDoList.is(json)) {
-        setToDoList(ToDoList.create(json))
+        toDoList.setItems(json.items)
       }
     }
   }, [])

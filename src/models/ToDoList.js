@@ -39,7 +39,8 @@ export const ToDoListItem = types
 export const ToDoList = types
   .model({
     items: types.optional(types.array(ToDoListItem), []),
-    prevItems: types.optional(types.array(ToDoListItem), [])
+    prevItems: types.optional(types.array(ToDoListItem), []),
+    filter: types.optional(types.string, 'todos')
   })
   .actions(self => ({
     add (title) {
@@ -88,6 +89,9 @@ export const ToDoList = types
     reorder (from, to) {
       const item = detach(self.items[from])
       self.items.splice(to, 0, item)
+    },
+    setFilter (filter) {
+      self.filter = filter
     }
   }))
   .views(self => ({
@@ -100,12 +104,13 @@ export const ToDoList = types
     get totalCompletedCount () {
       return self.items.filter(item => item.isCompleted).length
     },
-    getfilteredItems (filter) {
+    getFilteredItems () {
       const states = {
         todos: self.items,
         concluidos: self.items.filter(item => item.isCompleted),
         naoConcluidos: self.items.filter(item => !item.isCompleted)
       }
-      return states[filter]
+      console.log(self.filter)
+      return states[self.filter]
     }
   }))

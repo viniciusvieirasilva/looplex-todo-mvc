@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import ToDoListItemView from './ToDoListItemView'
 import { List, Button, notification, Modal, Divider } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
-import { observer } from 'mobx-react'
+import { observer, Observer } from 'mobx-react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import ListHeader from './ListHeader'
 import ListFooter from './ListFooter'
 
 const ToDoListView = observer(({ toDoList }) => {
-  const [filter, setFilter] = useState('todos')
   const [api, contextHolder] = notification.useNotification()
 
   const closeNotification = key => {
@@ -62,11 +61,6 @@ const ToDoListView = observer(({ toDoList }) => {
     return result
   }
 
-  const [items, setItems] = useState(toDoList.getfilteredItems(filter))
-  useEffect(() => {
-    setItems(toDoList.getfilteredItems(filter))
-  }, [filter, toDoList.getfilteredItems(filter).length])
-
   const onDragEnd = result => {
     if (!result.destination) {
       return
@@ -82,16 +76,12 @@ const ToDoListView = observer(({ toDoList }) => {
   }
 
   const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
     userSelect: 'none',
     padding: '15px 0',
-    // margin: `0 0 ${items.length}px 0`,
     borderRadius: '8px',
 
-    // change background colour if dragging
     background: isDragging ? 'lightgreen' : 'inherit',
 
-    // styles we need to apply on draggables
     ...draggableStyle
   })
 
@@ -111,41 +101,47 @@ const ToDoListView = observer(({ toDoList }) => {
           >
             {contextHolder}
             {contextHolderModal}
-            <List
-              header={<ListHeader toDoList={toDoList} />}
-              dataSource={items}
-              renderItem={(item, index) => {
-                return (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={getItemStyle(
-                          snapshot.isDragging,
-                          provided.draggableProps.style
-                        )}
+            <Observer>
+              {() => (
+                <List
+                  header={<ListHeader toDoList={toDoList} />}
+                  dataSource={toDoList.getFilteredItems()}
+                  renderItem={(item, index) => {
+                    return (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
                       >
-                        <ToDoListItemView
-                          item={item}
-                          openNotification={openNotification}
-                          closeNotification={closeNotification}
-                          deleteConfirm={deleteConfirm}
-                          onUndo={() => toDoList.undoRemove()}
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                )
-              }}
-            />
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                          >
+                            <ToDoListItemView
+                              item={item}
+                              openNotification={openNotification}
+                              closeNotification={closeNotification}
+                              deleteConfirm={deleteConfirm}
+                              onUndo={() => toDoList.undoRemove()}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    )
+                  }}
+                />
+              )}
+            </Observer>
             {provided.placeholder}
             <Divider />
             <ListFooter
               toDoList={toDoList}
-              filter={filter}
-              setFilter={setFilter}
               deleteConfirm={deleteConfirm}
               openNotification={openNotification}
             />

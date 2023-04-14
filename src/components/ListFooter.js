@@ -1,22 +1,18 @@
-import { Button, Divider } from 'antd'
-import { Radio, Typography } from 'antd'
+import { Button, Divider, Radio, Typography } from 'antd'
+import { Observer } from 'mobx-react'
 
-const ListFooter = ({
-  toDoList,
-  filter,
-  setFilter,
-  deleteConfirm,
-  openNotification
-}) => {
+const ListFooter = ({ toDoList, deleteConfirm, openNotification }) => {
   function handleChangeFilter (e) {
-    setFilter(e.target.value)
+    toDoList.setFilter(e.target.value)
   }
 
   const { Text } = Typography
 
   return (
     <div className='listFooter'>
-      <Text>{toDoList.totalLeftCount} itens restantes</Text>
+      <Observer>
+        {() => <Text>{toDoList.totalLeftCount} itens restantes</Text>}
+      </Observer>
       <Divider type='vertical' />
       <Radio.Group
         buttonStyle='solid'
@@ -30,7 +26,7 @@ const ListFooter = ({
       </Radio.Group>
       <Divider type='vertical' />
       {toDoList.totalCompletedCount &&
-      (filter == 'todos' || filter == 'concluidos') > 0 ? (
+      (toDoList.filter == 'todos' || toDoList.filter == 'concluidos') > 0 ? (
         <Button
           className='footerButton'
           danger
